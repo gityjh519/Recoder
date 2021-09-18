@@ -134,10 +134,10 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
     @objc func changeCurrentState(indexPath: IndexPath) {
         let model = listDate![indexPath.row]
         let text = model.isMySelf ? "未结账" : "已结账"
-        
-        self.configAlertMessage(message: "修改为" + text) {
-            self.changeCurrentModelState(indexPath: indexPath)
-        }
+        self.changeCurrentModelState(indexPath: indexPath)
+//        self.configAlertMessage(message: "修改为" + text) {
+//            
+//        }
     }
     
     func changeCurrentModelState(indexPath: IndexPath) {

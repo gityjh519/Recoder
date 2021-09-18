@@ -14,7 +14,11 @@ class TimeViewCell: UITableViewCell {
     
     @IBOutlet weak var beginTime: UILabel!
     
-    @IBOutlet weak var endTime: UILabel!
+    @IBOutlet weak var endTime: UILabel!{
+        didSet{
+            endTime.addCornerToLayer()
+        }
+    }
     
     weak var ctroller: TimeListController?
     

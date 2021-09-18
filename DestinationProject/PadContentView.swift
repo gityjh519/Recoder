@@ -11,10 +11,24 @@ import UIKit
 class PadContentView: UIView {
 // 50
 
-    @IBOutlet weak var allCountLabel: UILabel!
-    @IBOutlet weak var myCountLabel: UILabel!
+    @IBOutlet weak var allCountLabel: UILabel! {
+        didSet{
+            allCountLabel.addCornerToLayer()
+        }
+    }
+    @IBOutlet weak var myCountLabel: UILabel!{
+        didSet{
+            myCountLabel.addCornerToLayer()
+        }
+    }
     
-    @IBOutlet weak var unCountLabel: UILabel!
+    @IBOutlet weak var unCountLabel: UILabel!{
+        didSet{
+            unCountLabel.addCornerToLayer()
+        }
+    }
+    
+    
     
     func configMyCountLabelText(text: String) {
         myCountLabel.text = "已结账\n" + text;
@@ -27,4 +41,12 @@ class PadContentView: UIView {
         allCountLabel.text = "总计\n" + text
     }
     
+}
+
+
+extension UIView {
+    func addCornerToLayer() {
+        layer.cornerRadius = 6
+        layer.masksToBounds = true
+    }
 }
