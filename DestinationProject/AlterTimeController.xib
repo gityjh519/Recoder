@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlterTimeController" customModule="记录" customModuleProvider="target">
+            <connections>
+                <outlet property="dateButton" destination="Lug-5H-bVj" id="Wqq-Ww-82A"/>
+                <outlet property="datePicker" destination="vUn-hM-bTh" id="ymH-94-yOp"/>
+                <outlet property="priceTextField" destination="PD2-Pu-1Lh" id="25v-fd-EJI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="347" height="500"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上班日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kSd-Rf-TMA">
+                    <rect key="frame" x="20.000000000000004" y="14" width="57.333333333333343" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当天价格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V9V-Mn-1AO">
+                    <rect key="frame" x="20.000000000000004" y="51" width="57.333333333333343" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lug-5H-bVj">
+                    <rect key="frame" x="158" y="7.6666666666666679" width="169" height="30.000000000000004"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="2020年08月09日 星期一"/>
+                    <connections>
+                        <action selector="buttonAction:" destination="-1" eventType="touchUpInside" id="n5P-I8-2Iy"/>
+                    </connections>
+                </button>
+                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="wheels" translatesAutoresizingMaskIntoConstraints="NO" id="vUn-hM-bTh">
+                    <rect key="frame" x="0.0" y="135.66666666666666" width="347" height="169.99999999999997"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="170" id="m8A-ij-9Kg"/>
+                    </constraints>
+                    <date key="minimumDate" timeIntervalSinceReferenceDate="568033200">
+                        <!--2019-01-01 11:00:00 +0000-->
+                    </date>
+                    <connections>
+                        <action selector="changeDate:" destination="-1" eventType="valueChanged" id="Lsc-GN-Ck4"/>
+                    </connections>
+                </datePicker>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PD2-Pu-1Lh">
+                    <rect key="frame" x="158" y="42.666666666666664" width="149" height="33.999999999999993"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
+                </textField>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <constraints>
+                <constraint firstItem="Lug-5H-bVj" firstAttribute="centerY" secondItem="kSd-Rf-TMA" secondAttribute="centerY" id="3P3-SM-Rzs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vUn-hM-bTh" secondAttribute="trailing" id="5hv-Aw-A0R"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Lug-5H-bVj" secondAttribute="trailing" constant="20" id="6nf-T5-dbW"/>
+                <constraint firstItem="PD2-Pu-1Lh" firstAttribute="centerY" secondItem="V9V-Mn-1AO" secondAttribute="centerY" id="8q4-mE-QOw"/>
+                <constraint firstItem="kSd-Rf-TMA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Rld-6c-QFX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PD2-Pu-1Lh" secondAttribute="trailing" constant="40" id="dhv-7p-Y6U"/>
+                <constraint firstItem="vUn-hM-bTh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="e9b-cA-3te"/>
+                <constraint firstItem="V9V-Mn-1AO" firstAttribute="leading" secondItem="kSd-Rf-TMA" secondAttribute="leading" id="oSf-6m-hgz"/>
+                <constraint firstItem="V9V-Mn-1AO" firstAttribute="top" secondItem="kSd-Rf-TMA" secondAttribute="bottom" constant="20" id="q1V-5w-US8"/>
+                <constraint firstItem="kSd-Rf-TMA" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="14" id="vBU-tv-l2C"/>
+                <constraint firstItem="PD2-Pu-1Lh" firstAttribute="leading" secondItem="Lug-5H-bVj" secondAttribute="leading" id="ykW-HM-0cL"/>
+                <constraint firstItem="vUn-hM-bTh" firstAttribute="top" secondItem="V9V-Mn-1AO" secondAttribute="bottom" constant="67.666666666666629" id="zUA-cC-Vxx"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="-323.91304347826087" y="-36.684782608695656"/>
+        </view>
+    </objects>
+</document>
