@@ -28,7 +28,7 @@ class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "我的记录"
+        title = "我的记录A"
         
         mainTable = UITableView(frame: view.bounds);
         view.addSubview(mainTable);
