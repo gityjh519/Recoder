@@ -57,6 +57,11 @@ extension UIView {
     func addCornerToLayer() {
         layer.cornerRadius = 6
         layer.masksToBounds = true
+        
+        // 这个是新家的为啥就不行
+        let view = UIView()
+        addSubview(view)
+        view.removeFromSuperview()
     }
     
 }
