@@ -8,13 +8,22 @@
 
 import UIKit
 
-class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSource {
+protocol NumberChangeDelegate: NSObjectProtocol {
+    var isAccuratePrice: Bool {set get}
+}
+class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSource ,NumberChangeDelegate{
     
     var dataSource: [MapItemJson]!
     
     private var mainTable: UITableView!
     
     private var tableHeader: PadContentView!
+    
+    var isAccuratePrice = true{
+        didSet{
+            reloadCaculateCount()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +45,7 @@ class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSour
         
         tableHeader = UINib(nibName: "PadContentView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? PadContentView;
         tableHeader.frame = .init(x: 0, y: 0, width: view.bounds.width, height: 130)
+        tableHeader.controller = self
         mainTable.tableHeaderView = tableHeader
         
         
@@ -160,10 +170,16 @@ class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSour
             reuslt + (item.listCount?.count ?? 0)
         })
         
+        if let spl = "\(haveAll + count)".converNumberSpellOut() , isAccuratePrice{
+            tableHeader.configAllCountLabel(text: "\(spl)元-\(days ?? 0)天")
+
+        }else {
+            tableHeader.configAllCountLabel(text: "\(haveAll + count)元-\(days ?? 0)天")
+        }
+        
 
         tableHeader.configMyCountLabelText(text: "\(haveAll)元")
         tableHeader.configUnCountLabel(text: "\(count)元")
-        tableHeader.configAllCountLabel(text: "\(haveAll + count)元-\(days ?? 0)天")
         
     }
 
@@ -184,3 +200,32 @@ class MainRootController: BaseController,UITableViewDelegate,UITableViewDataSour
         navigationController?.pushViewController(ctrl, animated: true)
     }
 }
+
+
+extension String {
+    
+    func converNumberSpellOut() -> String? {
+        convertPerWan()
+//        if let v = convertPerWan() {
+//            return v
+//        }
+//        let numberF = NumberFormatter()
+//        numberF.locale = Locale(identifier: "zh")
+//        numberF.numberStyle = .spellOut
+//        if let mony = Int(self),mony > 0 {
+//            return numberF.string(from: NSNumber(value: mony))!
+//        }
+//        return nil
+        
+    }
+    func convertPerWan() -> String? {
+        let valueInt = Double(self) ?? 0
+        if valueInt >= 10000 {
+            let moneyStrl = String(format: "%0.2f万", (valueInt / 10000));
+            return moneyStrl.replacingOccurrences(of: ".00", with: "")
+        }
+        return nil
+    }
+}
+
+

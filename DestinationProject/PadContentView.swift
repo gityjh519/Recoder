@@ -10,6 +10,8 @@ import UIKit
 
 class PadContentView: UIView {
 // 50
+    
+    weak var controller: NumberChangeDelegate?
 
     @IBOutlet weak var allCountLabel: UILabel! {
         didSet{
@@ -28,6 +30,13 @@ class PadContentView: UIView {
         }
     }
     
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        if let acc = controller?.isAccuratePrice {
+            controller?.isAccuratePrice = !acc
+        }
+    }
     
     
     func configMyCountLabelText(text: String) {

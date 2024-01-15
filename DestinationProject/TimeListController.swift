@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeListController: BaseController,UITableViewDataSource,UITableViewDelegate {
+class TimeListController: BaseController,UITableViewDataSource,UITableViewDelegate ,NumberChangeDelegate{
     
     var mainTable: UITableView!
     
@@ -16,6 +16,11 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
     
     var textName = ""
     
+    var isAccuratePrice: Bool = false{
+        didSet{
+            setNaviTitle()
+        }
+    }
     
     var finishedBlock: ((_ list: [DetialItemJson]?)-> Void)?
     
@@ -23,6 +28,9 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
     
     var tableHeader: PadContentView!
     
+    deinit {
+        print(self)
+    }
     
     
     
@@ -44,6 +52,7 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
         mainTable.dataSource = self
         
         tableHeader = UINib(nibName: "PadContentView", bundle: nil).instantiate(withOwner: nil, options: nil).first as? PadContentView;
+        tableHeader.controller = self
         tableHeader.frame = .init(x: 0, y: 0, width: view.bounds.width, height: 130)
         mainTable.tableHeaderView = tableHeader
         
@@ -77,8 +86,14 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
                 unCountText += pInt
             }
         }
+        
+        if let spl = "\(unCountText + myCountText)".converNumberSpellOut(),isAccuratePrice {
+            tableHeader.configAllCountLabel(text: "\(spl)元-\(list.count)天") 
+        }else {
+            tableHeader.configAllCountLabel(text: "\(unCountText + myCountText)元-\(list.count)天") 
 
-        tableHeader.configAllCountLabel(text: "\(unCountText + myCountText)元-\(list.count)天") 
+        }
+
         tableHeader.configUnCountLabel(text: "\(unCountText)元-\(unDays)天")
         tableHeader.configMyCountLabelText(text: "\(myCountText)元-\(myDays)天")
     }
@@ -133,7 +148,7 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
     
     @objc func changeCurrentState(indexPath: IndexPath) {
         let model = listDate![indexPath.row]
-        let text = model.isMySelf ? "未结账" : "已结账"
+//        let text = model.isMySelf ? "未结账" : "已结账"
         self.changeCurrentModelState(indexPath: indexPath)
 //        self.configAlertMessage(message: "修改为" + text) {
 //            
@@ -161,7 +176,6 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
             self.configAlertMessage(message: "是否删除当前的记录") {
                 self.deleteIndexModel(indexPath: indexPath)
                 finished(true)
-                
             }
             
         })])
@@ -203,6 +217,7 @@ class TimeListController: BaseController,UITableViewDataSource,UITableViewDelega
             (model: DetialItemJson) in
             self.listDate?[indexPath.row] = model;
             tableView.reloadData()
+            self.setNaviTitle()
         }
         navigationController?.pushViewController(ctrl, animated: true)
     }
